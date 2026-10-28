@@ -11,7 +11,13 @@
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ go gopls gotools google-cloud-sdk ];
+          packages = with pkgs; [
+            go
+            gopls
+            gotools
+            kubectl
+            (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+          ];
         };
       });
     };
