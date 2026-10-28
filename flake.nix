@@ -11,7 +11,7 @@
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ go gopls gotools ];
+          packages = with pkgs; [ go gopls gotools google-cloud-sdk ];
         };
       });
     };
