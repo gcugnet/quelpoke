@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+    namespace: guillaume
+    name: quelpoke
+spec:
+  selector:
+    # Simple entrée clé: valeur, renseignée comme label du Pod.
+    app.kubernetes.io/name: quelpoke
+  ports:
+    - name: quelpoke
+      protocol: TCP
+      # Port du service, à l’intérieur du cluster.
+      port: 80
+      # Port sur lequel le conteneur du Pod `quelpoke` écoute.
+      targetPort: 8080
