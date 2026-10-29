@@ -1,0 +1,27 @@
+# apiVersion: apps/v1
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: quelpoke
+  namespace: guillaume
+spec:
+  # Gateway à laquelle est associée la route HTTP
+  parentRefs:
+  - kind: Gateway
+    name: external-http-gateway
+    # Le namespace de la gateway
+    namespace: infra
+  # Penser à définir les hostnames
+  hostnames:
+  - quelpoke.copy-paste.pro
+  # Règle que la requête doit suivre pour être dirigée vers la Gateway (backendRefs)
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /guillaume
+    # Pointe vers le service
+    backendRefs:
+    - name: quelpoke
+      # Port du service
+      port: 80
