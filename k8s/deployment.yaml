@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quelpoke
+  namespace: guillaume
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      # Simple entrée clé: valeur, renseignée comme label du Pod.
+      app.kubernetes.io/name: quelpoke
+  # Le bloc ci-dessous définit le pod à déployer.
+  template:
+    metadata:
+      labels:
+        # Simple entrée clé: valeur qui sert à identifier le pod dans les autres objets.
+        app.kubernetes.io/name: quelpoke
+    spec:
+      containers:
+      - name: quelpoke
+        image: europe-west9-docker.pkg.dev/cs-poc-hpzdycpiqjyvinhrczvlwcn/student-guillaume/quelpoke:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "52Mi"
+            cpu: "50m"
